@@ -1,0 +1,48 @@
+import colorama
+from colorama import Fore, Style
+
+# Inicializa o colorama (necessário para Windows)
+colorama.init()
+
+def exibir_alerta(nivel):
+    """
+    Função responsável por definir a cor e a mensagem 
+    conforme o nível do reservatório informado.
+    """
+    
+    # Lista de situações conforme o índice (Nível 1 ao 5)
+    # Usamos uma lista onde o índice 0 corresponde ao Nível 1
+    situacoes = [
+        {"msg": "Nível 1: Muito baixo (crítico)", "cor": Fore.RED},
+        {"msg": "Nível 2: Baixo", "cor": Fore.YELLOW},
+        {"msg": "Nível 3: Médio", "cor": Fore.GREEN},
+        {"msg": "Nível 4: Alto", "cor": Fore.CYAN},
+        {"msg": "Nível 5: Muito alto (alerta)", "cor": Fore.BLUE}
+    ]
+
+    # Validação para garantir que o nível está entre 1 e 5
+    if 1 <= nivel <= 5:
+        dados = situacoes[nivel - 1]
+        print(f"{dados['cor']}{dados['msg']}{Style.RESET_ALL}")
+    else:
+        print(f"{Fore.WHITE}Nível {nivel} inválido para o sistema.{Style.RESET_ALL}")
+
+def simular_monitoramento():
+    """
+    Simula o monitoramento percorrendo os níveis do reservatório.
+    """
+    print("-" * 40)
+    print("SISTEMA DE MONITORAMENTO HIDRÁULICO")
+    print("-" * 40)
+
+    # Lista representando os níveis que queremos testar/exibir
+    niveis_para_teste = [1, 2, 3, 4, 5]
+
+    for n in niveis_para_teste:
+        exibir_alerta(n)
+
+    print("-" * 40)
+    print("Simulação finalizada.")
+
+if __name__ == "__main__":
+    simular_monitoramento()
